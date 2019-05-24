@@ -1,36 +1,17 @@
-package modelo;
+package graphV;
 
 	import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
+	import java.util.Collections;
+	import java.util.HashMap;
+	import java.util.Iterator;
+	import java.util.LinkedList;
 
-import interfaces.InterfaceGraph;
-import structures.ComparatorGeneric;
-import structures.ExchangePair;
-import structures.MinHeap;
-import structures.UnionFind;
+	import interfaces.IBasicMethodsGraph;
+	import minHeap.MinHeap;
 
-	/**
-	 * This class groups the essential algorithms for graph management. 
-	 * We implemented the comparable interface to verify if we have two equal edges.
-	 * @author Juan sebastian cardona sanchez A00346539
-	 *
-	 * @param <V> - Vertex graph. (We also consider it generically as Value)
-	 * @param <E> - Edge graph. (We also consider it generically as Element)
-	 */
+	public class Graph<V,E extends Comparable<E>> {
 
-	public class GraphAlgorithms<V,E extends Comparable<E>> {
-
-	/**
-	 * This method is responsible for running the DFS algorithm within the graph.
-	 * @param graph - The graph that we are using
-	 * @return listsDFS - It returns the graphical interface, with it and making use of the 
-	 * interfaces we can return the same type of graph that we have entered per parameter.
-	 * in addition a new graph with the algorithms already executed.
-	 */
-	public ListGraph<V,E> dfsAlgorithm(InterfaceGraph<V, E> graph) {
+	public ListGraph<V,E> dfs(IBasicMethodsGraph<V, E> graph) {
 		ListGraph<V,E> listsDFS = new ListGraph<V,E>( graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();
 		for (int i = 0; i < edges.size(); i++) {		
@@ -47,14 +28,7 @@ import structures.UnionFind;
 		return listsDFS;
 	}
 	
-	/**
-	 * This method is responsible for running the BFS algorithm within the graph.
-	 * @param graph - The graph that we are using
-	 * @param vertex - Represents the vertex where you are going to start doing the BFS
-	 * @return listBFS - Returns a new graph (Graph adjacency list) with the algorithms already executed.
-	 */
-	
-	public ListGraph<V,E> bfsAlgorithm (InterfaceGraph<V,E> graph ,V vertex) {
+	public ListGraph<V,E> bfsAlgorithm (IBasicMethodsGraph<V,E> graph ,V vertex) {
 		ListGraph<V,E> listBFS = new ListGraph<V,E>( graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();
 		for (int i = 0; i < edges.size(); i++) {	
@@ -79,14 +53,7 @@ import structures.UnionFind;
 		return listBFS;
 	}
 	
-	/**
-	 * This method is responsible for running the Dijsktra algorithm within the graph.
-	 * @param graph - The graph that we are using
-	 * @param vertex - Represents the vertex where you are going to start doing the DIJSKTRA Actually we it
-	 * is going to be used, the vertice that enters by parameter would be the vertex where the algorithm's route finishes.
-	 * @return listDijkstra - Returns a new graph (Graph adjacency list) with the algorithms already executed.
-	 */
-	public ListGraph<V,E> dijkstraAlgorithm(InterfaceGraph<V, E> graph ,V vertex) {
+	public ListGraph<V,E> dijkstraAlgorithm(IBasicMethodsGraph<V, E> graph ,V vertex) {
 		ListGraph<V,E> listDijkstra = new ListGraph<V,E>(graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();		
 		for (int i = 0; i < edges.size(); i++) {		
@@ -104,7 +71,7 @@ import structures.UnionFind;
 			Iterator<Vertex<V,E>> iterator = vertex2.neighborIterator();			
 			while( iterator.hasNext()) {			
 				Vertex<V,E> vertex3 = iterator.next();
-				E lab= vertex2.getEdges( vertex3 ).get(0).getLabel();			
+				E lab= vertex2.getEdges( vertex3 ).get(0).getWeight();			
 				if((Double.valueOf(lab.toString()))+ vertex2.getInfinite() < vertex3.getInfinite()) {				
 					vertex3.setVertexPrevious( vertex2);
 					priority.decreaseKey( vertex3,Double.valueOf(lab.toString())+ vertex2.getInfinite());
@@ -114,14 +81,7 @@ import structures.UnionFind;
 		return listDijkstra;
 	}
 
-	/**
-	 * This method is responsible for running the FloydWarshall algorithm within the graph.
-	 * @param graph - The graph that we are using
-	 * @return matrix - Returns a hashMap (which plays the role of a matrix, but in this case more generic)
-	 * in addition a new graph with the algorithms already executed.
-	 * This matrix is formed with HashMap of the weights of the vertices of the graph.
-	 */
-	public HashMap<ExchangePair<V,V>,Double> floydWarshall(InterfaceGraph<V, E> graph) {
+	public HashMap<ExchangePair<V,V>,Double> floydWarshall(IBasicMethodsGraph<V, E> graph) {
 		
 		ArrayList<V> values = graph.getValues();
 		HashMap<ExchangePair<V,V>,Double> matrix = new HashMap<>();		
@@ -130,7 +90,7 @@ import structures.UnionFind;
 			for (int j = 0; j < values.size(); j++) {			
 				ExchangePair<V,V> pair = new ExchangePair<>(values.get(i),values.get(j));
 				if(!matrix.containsKey(pair)) {	
-					E label = graph.getLabel(values.get(i),values.get(j));
+					E label = graph.getWeight(values.get(i),values.get(j));
 					double valueMAX = 0;					
 					if(label == null) {					
 						if(!values.get(i).equals(values.get(j))) {
@@ -173,13 +133,13 @@ import structures.UnionFind;
 	 * @param graph - The graph that we are using
 	 * @return listKruskal - Returns a new graph (Graph adjacency list) with the algorithms already executed.
 	 */
-	public ListGraph<V,E> kruskal(InterfaceGraph<V, E> graph) {
+	public ListGraph<V,E> kruskal(IBasicMethodsGraph<V, E> graph) {
 	
 		ListGraph<V,E> listKruskal = new ListGraph<V,E>( graph.isGraphUndirected() );	
 		ArrayList<Object[]> edges = graph.getEdges();
 		
 		HashMap<V,Integer> theValuesToIntegers = new HashMap<V,Integer>();	
-		Collections.sort(edges,new ComparatorGeneric<E>());	
+		Collections.sort(edges,new ComparatorG<E>());	
 		int actVal=0;	
 		UnionFind unionRelation = new UnionFind( graph.getAmountVertices());
 	
@@ -218,7 +178,7 @@ import structures.UnionFind;
 	 * @return listPrim - Returns a new graph (Graph adjacency list) with the algorithms already executed.
 	 */
 
-	public ListGraph<V,E> prim(InterfaceGraph<V, E> graph ,V vertex) {
+	public ListGraph<V,E> prim(IBasicMethodsGraph<V, E> graph ,V vertex) {
 
 		ListGraph<V,E> listPrim = new ListGraph<V,E>( graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();
@@ -231,14 +191,14 @@ import structures.UnionFind;
 			vertices.add( listPrim.getVertex(values.get(i)));
 		}		
 		listPrim.getVertex( vertex ).setInfinite(0);		
-		MinHeap<V,E>priorityQueue=new MinHeap<V,E>(vertices);
+		MinHeap<V,E> priorityQueue=new MinHeap<V,E>(vertices);
 		
 		while(!priorityQueue.isEmpty()) {	
 			Vertex<V,E> u=priorityQueue.extractMin();
 			Iterator<Vertex<V,E>> it=u.neighborIterator();	
 			while(it.hasNext()) {		
 				Vertex<V,E> w=it.next();
-				E lab=u.getEdges(w).get(0).getLabel();				
+				E lab=u.getEdges(w).get(0).getWeight();				
 				if(priorityQueue.contains(w)&&Double.valueOf(lab.toString())<w.getInfinite()) {				
 					w.setVertexPrevious(u);
 					priorityQueue.decreaseKey(w,Double.valueOf(lab.toString()));
@@ -248,11 +208,6 @@ import structures.UnionFind;
 		return listPrim;
 	}
 
-	/**
-	 * Because it performs the algorithm recursively, to solve this, when the DFB algorithm leads to 0, 
-	 * it must travel to its neighbors ... and so on.
-	 * @param vertex -  Vertice start.
-	 */
 	private void auxDFS(Vertex<V, E> vertex) {	
 		vertex.setKey(1);
 		Iterator<Vertex<V,E>> iterator = vertex.neighborIterator();	

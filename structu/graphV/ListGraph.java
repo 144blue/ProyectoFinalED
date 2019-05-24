@@ -19,13 +19,13 @@ package graphV;
 		this.undirected = undirected;
 	}
 	
-	public boolean insertVertex(V vertice) {
+	public boolean insertVertex(V vert) {
 		Vertex<V,E> verticeFirst = null;	
-		if(graph.containsKey(vertice)) {	
+		if(graph.containsKey(vert)) {	
 			return false;
 		}else {			
-			verticeFirst=new Vertex<V,E>(vertice);
-			graph.put(vertice,verticeFirst);
+			verticeFirst=new Vertex<V,E>(vert);
+			graph.put(vertS,verticeFirst);
 			return true;		
 		}	
 	}
