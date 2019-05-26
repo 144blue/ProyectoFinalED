@@ -6,18 +6,32 @@ package graphV;
 	import java.util.Iterator;
 	import interfaces.IGraph;
 
+	/**
+	 * This class is a representation of a graph with an Adjacency List.
+	 * @author juanmgarcia97, vardo159 & 144blue.
+	 *
+	 * @param <V> generic value representing the vertex of a graph.
+	 * @param <E> generic value representing the edge of a graph.
+	 */
 	public class ListGraph<V, E extends Comparable<E>> implements IGraph<V,E> {
 
 	private boolean undirected;
 	private HashMap<V,Vertex<V,E>> graph;
 	private HashSet<Edge<V,E>> edges;
 	
+	/**
+	 * This is the constructor of the class, it creates a graph list and initializes all the attributes and relationships it has.
+	 * @param undirected true or false, defining whether the graph is undirected or directed, respectively.
+	 */
 	public ListGraph(boolean undirected) {
 		this.graph = new HashMap<V,Vertex<V,E>>();
 		this.edges = new HashSet<Edge<V,E>>();
 		this.undirected = undirected;
 	}
 	
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#insertVertex(java.lang.Object)
+	 */
 	public boolean insertVertex(V vert) {
 		Vertex<V,E> vertFirst = null;	
 		if(graph.containsKey(vert)) {	
@@ -29,6 +43,9 @@ package graphV;
 		}	
 	}
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#insertEdge(java.lang.Object, java.lang.Object, java.lang.Object)
+	 */
 	public boolean insertEdge(E egde, V vertice1, V vertice2) {
 		Vertex<V,E> verticeFirst = null;
 		Vertex<V,E> verticeSecond = null;		
@@ -58,6 +75,9 @@ package graphV;
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#getValues()
+	 */
 	public ArrayList<V> getValues() {
 		ArrayList<V>vers=new ArrayList<V>();
 		Iterator<V>it=valuesIterator();	
@@ -67,6 +87,9 @@ package graphV;
 		return vers;
 	}
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#getEdges()
+	 */
 	public ArrayList<Object[]> getEdges() {
 		ArrayList<Object[]> arrayList =new ArrayList<Object[]>(); 
 		Iterator<Edge<V,E>> getEdges = edgeIterator();	
@@ -81,6 +104,9 @@ package graphV;
 		return arrayList;
 	}
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#thereIsEdge(java.lang.Object, java.lang.Object)
+	 */
 	public boolean thereIsEdge(V vertice1, V vertice2) {		
 		Vertex<V,E> verticeFirst = getVertex(vertice1);
 		Vertex<V,E> verticeSecond = getVertex(vertice2);		
@@ -91,57 +117,99 @@ package graphV;
 		return false;
 	}
 	
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#isGraphUndirected()
+	 */
 	@Override
 	public boolean isGraphUndirected() {
 		return undirected;
 	}
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#getAmountVertices()
+	 */
 	@Override
 	public int getAmountVertices() {
 		return graph.size();
 	}
 
 
+	/**
+	 * This method returns the HashMap that stores all the vertices of the graph.
+	 * @return returns the vertices present in the graph.
+	 */
 	public HashMap<V, Vertex<V, E>> getGraph() {
 		return graph;
 	}
 
+	/**
+	 * This method modifies the HashMap that contains all the vertices of the graph.
+	 * @param graph new HashMap that contains all the vertices of the graph.
+	 */
 	public void setGraph(HashMap<V, Vertex<V, E>> graph) {
 		this.graph = graph;
 	}
 
+	/**
+	 * @param undirected
+	 */
 	public void setUndirected(boolean undirected) {
 		this.undirected = undirected;
 	}
 	
+	/**
+	 * @return
+	 */
 	public boolean isUndirected() {
 		return undirected;
 	}
 
+	/**
+	 * @param edges
+	 */
 	public void setEdges(HashSet<Edge<V, E>> edges) {
 		this.edges = edges;
 	}
 	
+	/**
+	 * @return
+	 */
 	public Iterator<V> valuesIterator() {
 		return graph.keySet().iterator();
 	}
 	
+	/**
+	 * @return
+	 */
 	public Iterator<Edge<V,E>> edgeIterator(){
 		return edges.iterator();
 	}
 	
+	/**
+	 * @param vertex
+	 * @return
+	 */
 	public Vertex<V, E> getVertex(V vertex) {
 		return graph.get(vertex);
 	}
 	
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#deleteEdge(java.lang.Object, java.lang.Object)
+	 */
 	public boolean deleteEdge(V vertice1, V vertice2) {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#deleteVertex(java.lang.Object)
+	 */
 	public boolean deleteVertex(V vertice) {
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#thereIsVertex(java.lang.Object)
+	 */
 	public boolean thereIsVertex(V vertice) {		
 		ArrayList<V> vertex = getValues();
 		for (int i = 0; i < vertex.size(); i++) {					
@@ -154,11 +222,17 @@ package graphV;
 		return false;
 	}
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#graphIsConnected()
+	 */
 	public boolean graphIsConnected() {
 		return false;
 	}
 	
 
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#getWeight(java.lang.Object, java.lang.Object)
+	 */
 	public E getWeight(V vertice1, V vertice2) {		
 		if(getVertex(vertice1)==null || getVertex(vertice2)==null) {		
 			return null;
@@ -175,6 +249,9 @@ package graphV;
 	 * This method is in charge of obtaining all the neighbors given a vertex.
 	 * @param vertice - Vertex that you want to know your neighbors.
 	 * @return ArrayList<V> - Returns all the neighbors of the given vertex.
+	 */
+	/* (non-Javadoc)
+	 * @see interfaces.IGraph#getNeighbors(java.lang.Object)
 	 */
 	@Override
 	public ArrayList<V> getNeighbors(V vertice) {	

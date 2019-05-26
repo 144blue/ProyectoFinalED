@@ -53,6 +53,7 @@ class GraphAlgorithmsTest {
 		scenario1();
 		ListGraph<Integer, Integer> aux=meths.dfs(graph);
 		Vertex<Integer,Integer> ver = aux.getVertex(3);
+		int i=0;
 		
 	}
 	
