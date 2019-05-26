@@ -55,6 +55,12 @@ class GraphAlgorithmsTest {
 		Vertex<Integer,Integer> ver = aux.getVertex(3);
 		int i=0;
 		
+		while( ver!=null) {		
+			System.out.println(ver.getValue());
+			ver=ver.getVertexPrevious();
+			
+		}
+		
 	}
 	
 
