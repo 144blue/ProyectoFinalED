@@ -31,6 +31,15 @@ class ListGraphTest {
 		graphL.insertEdge(1,2,4);
 		graphL.insertEdge(3,4,7);
 	}
+	
+	public void scenario4() {
+		graphL=new ListGraph<Integer,Integer>(true);
+		graphL.insertVertex(3);
+		graphL.insertVertex(2);
+		graphL.insertVertex(1);
+		graphL.insertVertex(6);
+		graphL.insertVertex(9);
+	}
 
 	@Test
 	void test0() {
@@ -83,6 +92,22 @@ class ListGraphTest {
 	}
 	
 	@Test
+	void testGetAmountVertices() {
+		scenario4();
+		assertTrue(graphL.getAmountVertices()==5);
+	}
+	
+	@Test
+	void testgetValues() {
+		scenario4();
+		ArrayList<Integer> elems= graphL.getValues();
+		int[] expected= {3,2,1,6,9};
+		
+		for(int i=0;i<elems.size();i++)
+			assertTrue(elems.get(i).intValue()==expected[i]);
+	}
+	
+	@Test
 	void testThereIsVertex() {
 		scenario3();
 		assertTrue(graphL.thereIsVertex(3));
@@ -94,6 +119,10 @@ class ListGraphTest {
 		
 	}
 	
-	
+	@Test
+	void testIsGraphUndirected() {
+		scenario1();
+		assertTrue(graphL.isGraphUndirected());
+	}
 
 }
