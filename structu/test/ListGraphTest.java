@@ -102,7 +102,7 @@ class ListGraphTest {
 	void testgetValues() {
 		scenario4();
 		ArrayList<Integer> elems= graphL.getValues();
-		int[] expected= {3,2,1,6,9};
+		int[] expected= {1,2,3,6,9};
 		
 		for(int i=0;i<elems.size();i++)
 			assertTrue(elems.get(i).intValue()==expected[i]);

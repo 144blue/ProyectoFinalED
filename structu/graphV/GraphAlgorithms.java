@@ -11,7 +11,7 @@ package graphV;
 	import interfaces.IGraph;
 	import minHeapG.MinHeapG;
 
-	public class Graph<V,E extends Comparable<E>> {
+	public class GraphAlgorithms<V,E extends Comparable<E>> {
 
 	public ListGraph<V,E> dfs(IGraph<V, E> graph) {
 		ListGraph<V,E> listsDFS = new ListGraph<V,E>( graph.isGraphUndirected());
