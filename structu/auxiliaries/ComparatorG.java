@@ -1,4 +1,4 @@
-package graphV;
+package auxiliaries;
 
 
 	import java.util.Comparator;

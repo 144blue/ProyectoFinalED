@@ -1,16 +1,16 @@
-package minHeap;
+package minHeapG;
 
 	import java.util.ArrayList;
 	import java.util.HashMap;
 	import graphV.Vertex;
 
-	public class MinHeap<V,E extends Comparable<E>>{
+	public class MinHeapG<V,E extends Comparable<E>>{
 		
 	private HashMap<Vertex<V,E>,Integer> vertexGraph;
 	private Vertex<V,E>[] vertex;	
 	private int size;
 
-	public MinHeap(ArrayList<Vertex<V,E>> arrayVertex){
+	public MinHeapG(ArrayList<Vertex<V,E>> arrayVertex){
 		this.vertex = new Vertex[ arrayVertex.size() ];		
 		this.size = arrayVertex.size()-1;		
 		this.vertexGraph = new HashMap<Vertex<V,E>,Integer>();

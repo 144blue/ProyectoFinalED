@@ -4,10 +4,9 @@ package graphV;
 	import java.util.HashMap;
 	import java.util.HashSet;
 	import java.util.Iterator;
-	import interfaces.IBasicMethodsGraph;
+	import interfaces.IGraph;
 
-
-	public class ListGraph<V, E extends Comparable<E>> implements IBasicMethodsGraph<V,E> {
+	public class ListGraph<V, E extends Comparable<E>> implements IGraph<V,E> {
 
 	private boolean undirected;
 	private HashMap<V,Vertex<V,E>> graph;
@@ -20,12 +19,12 @@ package graphV;
 	}
 	
 	public boolean insertVertex(V vert) {
-		Vertex<V,E> verticeFirst = null;	
+		Vertex<V,E> vertFirst = null;	
 		if(graph.containsKey(vert)) {	
 			return false;
 		}else {			
-			verticeFirst=new Vertex<V,E>(vert);
-			graph.put(vertS,verticeFirst);
+			vertFirst=new Vertex<V,E>(vert);
+			graph.put(vert,vertFirst);
 			return true;		
 		}	
 	}

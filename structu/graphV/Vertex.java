@@ -7,9 +7,8 @@ import java.util.Iterator;
 	public class Vertex<V, E extends Comparable<E>> {
 
 		private HashMap<Vertex<V,E>,ArrayList<Edge<V,E>>> edges;
-
 		private ArrayList<Vertex<V,E>> ancestors;
-		private Vertex<V,E> vertexPrevious;
+		private Vertex<V,E> previous;
 		private V value;
 		private int key;
 		private double infinite;
@@ -17,7 +16,7 @@ import java.util.Iterator;
 	public Vertex(V vertice) {		
 		this.edges = new HashMap<Vertex<V,E>,ArrayList<Edge<V,E>>>();
 		this.ancestors = new ArrayList<Vertex<V,E>>();
-		this.vertexPrevious = null;
+		this.previous = null;
 		this.infinite = Double.MAX_VALUE;
 		this.value = vertice;
 	}
@@ -75,11 +74,11 @@ import java.util.Iterator;
 	}
 
 	public Vertex<V, E> getVertexPrevious() {
-		return vertexPrevious;
+		return previous;
 	}
 
 	public void setVertexPrevious(Vertex<V, E> vertexPrevious) {
-		this.vertexPrevious = vertexPrevious;
+		this.previous = vertexPrevious;
 	}
 
 	public void addEdge(Edge<V, E> edge, Vertex<V, E> vertex) {		
@@ -93,6 +92,8 @@ import java.util.Iterator;
 			edges.put(vertex, node );
 		}
 	}
+	
+	//it's upside down
 	
 	public boolean containsEdge(E edgeToSearch, Vertex<V, E> vertex) {		
 		if(!edges.containsKey(vertex)) {

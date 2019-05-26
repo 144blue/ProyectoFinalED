@@ -5,13 +5,15 @@ package graphV;
 	import java.util.HashMap;
 	import java.util.Iterator;
 	import java.util.LinkedList;
-
-	import interfaces.IBasicMethodsGraph;
-	import minHeap.MinHeap;
+	import auxiliaries.ComparatorG;
+	import auxiliaries.ExchangePair;
+	import auxiliaries.UnionFind;
+	import interfaces.IGraph;
+	import minHeapG.MinHeapG;
 
 	public class Graph<V,E extends Comparable<E>> {
 
-	public ListGraph<V,E> dfs(IBasicMethodsGraph<V, E> graph) {
+	public ListGraph<V,E> dfs(IGraph<V, E> graph) {
 		ListGraph<V,E> listsDFS = new ListGraph<V,E>( graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();
 		for (int i = 0; i < edges.size(); i++) {		
@@ -28,7 +30,7 @@ package graphV;
 		return listsDFS;
 	}
 	
-	public ListGraph<V,E> bfsAlgorithm (IBasicMethodsGraph<V,E> graph ,V vertex) {
+	public ListGraph<V,E> bfs(IGraph<V,E> graph ,V vertex) {
 		ListGraph<V,E> listBFS = new ListGraph<V,E>( graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();
 		for (int i = 0; i < edges.size(); i++) {	
@@ -53,7 +55,7 @@ package graphV;
 		return listBFS;
 	}
 	
-	public ListGraph<V,E> dijkstraAlgorithm(IBasicMethodsGraph<V, E> graph ,V vertex) {
+	public ListGraph<V,E> dijkstra(IGraph<V, E> graph ,V vertex) {
 		ListGraph<V,E> listDijkstra = new ListGraph<V,E>(graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();		
 		for (int i = 0; i < edges.size(); i++) {		
@@ -65,7 +67,7 @@ package graphV;
 			vertices.add( listDijkstra.getVertex(values.get(i)));
 		}		
 		listDijkstra.getVertex( vertex ).setInfinite(0);		
-		MinHeap<V,E> priority = new MinHeap<V,E>(vertices);		
+		MinHeapG<V,E> priority = new MinHeapG<V,E>(vertices);		
 		while(!priority.isEmpty()) {		
 			Vertex<V,E> vertex2 = priority.extractMin();
 			Iterator<Vertex<V,E>> iterator = vertex2.neighborIterator();			
@@ -81,7 +83,7 @@ package graphV;
 		return listDijkstra;
 	}
 
-	public HashMap<ExchangePair<V,V>,Double> floydWarshall(IBasicMethodsGraph<V, E> graph) {
+	public HashMap<ExchangePair<V,V>,Double> floydWarshall(IGraph<V, E> graph) {
 		
 		ArrayList<V> values = graph.getValues();
 		HashMap<ExchangePair<V,V>,Double> matrix = new HashMap<>();		
@@ -133,7 +135,7 @@ package graphV;
 	 * @param graph - The graph that we are using
 	 * @return listKruskal - Returns a new graph (Graph adjacency list) with the algorithms already executed.
 	 */
-	public ListGraph<V,E> kruskal(IBasicMethodsGraph<V, E> graph) {
+	public ListGraph<V,E> kruskal(IGraph<V, E> graph) {
 	
 		ListGraph<V,E> listKruskal = new ListGraph<V,E>( graph.isGraphUndirected() );	
 		ArrayList<Object[]> edges = graph.getEdges();
@@ -178,7 +180,7 @@ package graphV;
 	 * @return listPrim - Returns a new graph (Graph adjacency list) with the algorithms already executed.
 	 */
 
-	public ListGraph<V,E> prim(IBasicMethodsGraph<V, E> graph ,V vertex) {
+	public ListGraph<V,E> prim(IGraph<V, E> graph ,V vertex) {
 
 		ListGraph<V,E> listPrim = new ListGraph<V,E>( graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();
@@ -191,7 +193,7 @@ package graphV;
 			vertices.add( listPrim.getVertex(values.get(i)));
 		}		
 		listPrim.getVertex( vertex ).setInfinite(0);		
-		MinHeap<V,E> priorityQueue=new MinHeap<V,E>(vertices);
+		MinHeapG<V,E> priorityQueue=new MinHeapG<V,E>(vertices);
 		
 		while(!priorityQueue.isEmpty()) {	
 			Vertex<V,E> u=priorityQueue.extractMin();

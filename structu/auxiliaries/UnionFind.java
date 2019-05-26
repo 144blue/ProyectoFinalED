@@ -1,4 +1,4 @@
-package graphV;
+package auxiliaries;
 
 	public class UnionFind{
 	

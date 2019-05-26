@@ -2,7 +2,7 @@ package interfaces;
 
 import java.util.ArrayList;
 
-	public interface IBasicMethodsGraph<V, E> {
+	public interface IGraph<V, E> {
 		public E getWeight(V v1,V v2);
 		public boolean insertVertex(V v);
 		public int getAmountVertices();

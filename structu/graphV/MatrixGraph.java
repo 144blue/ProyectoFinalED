@@ -2,10 +2,9 @@ package graphV;
 
 	import java.util.ArrayList;
 import java.util.HashMap;
-
-import interfaces.IBasicMethodsGraph;
+import interfaces.IGraph;
 	
-	public class MatrixGraph<V, E extends Comparable<E>> implements IBasicMethodsGraph<V,E> {
+	public class MatrixGraph<V, E extends Comparable<E>> implements IGraph<V,E> {
 
 	
 	private HashMap<Integer, V> intToValue;
