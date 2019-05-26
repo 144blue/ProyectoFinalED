@@ -1,7 +1,8 @@
 package auxiliaries;
 
 /**
- * @author juanmgarcia97, vardo159 & 144blue This class is responsible for
+ * @author juanmgarcia97, vardo159 & 144blue 
+ * This class is responsible for
  *         making the union of sets.
  *
  */
