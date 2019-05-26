@@ -11,8 +11,21 @@ package graphV;
 	import interfaces.IGraph;
 	import minHeapG.MinHeapG;
 
+	/**
+	 * This class contains the most used algorithms to traverse a graph.
+	 * @author juanmgarcia97, vardo159 & 144blue.
+	 * 
+	 *
+	 * @param <V>
+	 * @param <E>
+	 */
 	public class Graph<V,E extends Comparable<E>> {
 
+	/**
+	 * This method realize the Deep First Search (DFS) of a graph, returning an Adjacency List.
+	 * @param graph interface representing the graph to do the DFS.
+	 * @return Adjacency List representing the DFS.
+	 */
 	public ListGraph<V,E> dfs(IGraph<V, E> graph) {
 		ListGraph<V,E> listsDFS = new ListGraph<V,E>( graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();
@@ -30,6 +43,12 @@ package graphV;
 		return listsDFS;
 	}
 	
+	/**
+	 * This method realize the Breadth First Search (BFS) of a graph, returning an Adjacency List.
+	 * @param graph interface representing the graph to do the BFS.
+	 * @param vertex generic value representing the vertex in which the algorithm begins.
+	 * @return Adjacency List representing the BFS.
+	 */
 	public ListGraph<V,E> bfs(IGraph<V,E> graph ,V vertex) {
 		ListGraph<V,E> listBFS = new ListGraph<V,E>( graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();
@@ -55,6 +74,12 @@ package graphV;
 		return listBFS;
 	}
 	
+	/**
+	 * This method realize the Dijkstra Algorithm (find the shortest path between one vertex and all in a graph)
+	 * @param graph interface representing the graph to do the Dijkstra Algorithm.
+	 * @param vertex generic value representing the vertex in which the algorithm begins.
+	 * @return Adjacency List representing the shortest path from one vertex to all in the graph.
+	 */
 	public ListGraph<V,E> dijkstra(IGraph<V, E> graph ,V vertex) {
 		ListGraph<V,E> listDijkstra = new ListGraph<V,E>(graph.isGraphUndirected());
 		ArrayList<Object[]> edges = graph.getEdges();		
@@ -83,6 +108,11 @@ package graphV;
 		return listDijkstra;
 	}
 
+	/**
+	 * This method realize the Floyd-Warshall Algorithm (find the shortest path between all the pairs of vertex in the graph).
+	 * @param graph interface representing the graph to do the Floyd-Warshall Algorithm.
+	 * @return HashMap representing the matrix with all the paths.
+	 */
 	public HashMap<ExchangePair<V,V>,Double> floydWarshall(IGraph<V, E> graph) {
 		
 		ArrayList<V> values = graph.getValues();
@@ -131,9 +161,9 @@ package graphV;
 	}
 
 	/**
-	 * This method is responsible for running the Kruskal algorithm within the graph.
-	 * @param graph - The graph that we are using
-	 * @return listKruskal - Returns a new graph (Graph adjacency list) with the algorithms already executed.
+	 * This method is responsible for running the Kruskal Algorithm within the graph.
+	 * @param graph interface representing the graph to do the Kruskal Algorithm.
+	 * @return listKruskal - Adjacency List with the algorithm already executed.
 	 */
 	public ListGraph<V,E> kruskal(IGraph<V, E> graph) {
 	
@@ -174,12 +204,11 @@ package graphV;
 	}
 
 	/**
-	 * This method is responsible for running the prim algorithm within the graph.
-	 * @param graph - The graph that we are using
-	 * @param vertex - Represents the vertex where you are going to start doing the prim
-	 * @return listPrim - Returns a new graph (Graph adjacency list) with the algorithms already executed.
+	 * This method is responsible for running the Prim Algorithm within the graph.
+	 * @param graph interface representing the graph to do the Prim Algorithm.
+	 * @param vertex generic value representing the vertex in which the algorithm begins.
+	 * @return listPrim returns an Adjacency List with the algorithm already executed.
 	 */
-
 	public ListGraph<V,E> prim(IGraph<V, E> graph ,V vertex) {
 
 		ListGraph<V,E> listPrim = new ListGraph<V,E>( graph.isGraphUndirected());
