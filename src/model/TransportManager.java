@@ -15,6 +15,7 @@ public class TransportManager {
 	
 	private Station[] stations;
 	private GraphAlgorithms<String, Integer> algoritms;
+	
 	private ListGraph<String, Integer> graphNOCambas;
 	private MatrixGraph<String, Integer> graphMatrix;
 

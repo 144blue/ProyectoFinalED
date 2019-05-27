@@ -1,11 +1,15 @@
 package application;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 
-public class SampleController {
+public class SampleController implements Initializable {
 	
 	@FXML
 	private ObservableList<String> beginList = FXCollections.observableArrayList();
@@ -16,15 +20,15 @@ public class SampleController {
 	@FXML
 	private ComboBox<String> list2;
 	
-	@FXML
-	public void intialize() {
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
 		addStationList();
 		
 		list1.setItems(beginList);
-		list1.setVisible(true);
+		list1.setVisibleRowCount(8);
 		
 		list2.setItems(endList);
-		list2.setVisible(true);
+		list2.setVisibleRowCount(8);
 	}
 	
 	public void addStationList() {
