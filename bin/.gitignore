@@ -1,2 +1,6 @@
-/test/
+/application/
+/auxiliaries/
 /graphV/
+/interfaces/
+/minHeapG/
+/test/
