@@ -67,7 +67,7 @@ package graphV;
 		for (int i = 0; i < values.size(); i++) {		
 			vertices.add( listDijkstra.getVertex(values.get(i)));
 		}		
-		listDijkstra.getVertex( vertex ).setInfinite(0);		
+		listDijkstra.getVertex(vertex ).setInfinite(0);		
 		MinHeapG<V,E> priority = new MinHeapG<V,E>(vertices);		
 		while(!priority.isEmpty()) {		
 			Vertex<V,E> vertex2 = priority.extractMin();

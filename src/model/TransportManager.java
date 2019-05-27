@@ -5,6 +5,7 @@ import java.util.HashMap;
 import graphV.GraphAlgorithms;
 import graphV.ListGraph;
 import graphV.MatrixGraph;
+import graphV.Vertex;
 
 public class TransportManager {
 
@@ -73,14 +74,25 @@ public class TransportManager {
 	}
 	
 	public static void main(String[] args) {
+		TransportManager tp=new TransportManager();
+		tp.initializeGraphS();
+		System.out.println(tp.giveBestRoute("Prado","La Aurora"));
 		
-	
+		
 	}
 	
-	public void giveBestRoute(Integer origin, Integer end) {
+	public String giveBestRoute(String end, String origin) {
 		
+		ListGraph<String, Integer> tempo= algoritms.dijkstra(graphNOCambas, origin);
+		Vertex<String, Integer> destination= tempo.getVertex(end);
+		String result="";
+		while (destination!=null) {
+			result+= destination.getValue()+"-";
+			destination =destination.getVertexPrevious();
+		}
 		
-		
+		return result;
+	
 	}
 	
 	
