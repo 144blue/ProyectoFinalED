@@ -7,24 +7,40 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <children>
-      <Pane layoutX="42.0" layoutY="53.0" prefHeight="363.0" prefWidth="491.0">
+      <VBox prefHeight="618.0" prefWidth="498.0">
          <children>
-            <ImageView fitHeight="367.0" fitWidth="488.0" layoutX="7.0" layoutY="-2.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../img/Mapa.png" />
-               </image>
-            </ImageView>
+            <Pane prefHeight="72.0" prefWidth="508.0">
+               <children>
+                  <Label contentDisplay="CENTER" layoutX="182.0" layoutY="17.0" prefHeight="39.0" prefWidth="145.0" text="RAPIMETRO">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane prefHeight="367.0" prefWidth="461.0">
+               <children>
+                  <ImageView fitHeight="367.0" fitWidth="488.0" layoutX="7.0" layoutY="-2.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../img/Mapa.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Pane prefHeight="47.0" prefWidth="498.0">
+               <children>
+                  <ComboBox fx:id="list1" layoutX="45.0" layoutY="12.0" prefWidth="150.0" promptText="Estación de salida" />
+                  <ComboBox fx:id="list2" layoutX="277.0" layoutY="12.0" prefWidth="150.0" promptText="Estación de llegada" />
+               </children>
+            </Pane>
+            <Pane prefHeight="160.0" prefWidth="498.0">
+               <children>
+                  <TextArea layoutX="8.0" prefHeight="139.0" prefWidth="482.0" />
+               </children>
+            </Pane>
          </children>
-      </Pane>
-      <Label layoutX="215.0" layoutY="14.0" prefHeight="39.0" prefWidth="145.0" text="RAPIMETRO">
-         <font>
-            <Font size="27.0" />
-         </font>
-      </Label>
-      <ComboBox fx:id="list1" layoutX="65.0" layoutY="470.0" prefWidth="150.0" promptText="Estación de salida" />
-      <ComboBox fx:id="list2" layoutX="242.0" layoutY="470.0" prefWidth="150.0" promptText="Estación de llegada" />
+      </VBox>
    </children>
 </AnchorPane>
