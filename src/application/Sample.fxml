@@ -42,6 +42,7 @@
                         <TextField fx:id="estacionExistente" layoutX="14.0" layoutY="96.0" promptText="estacion existente" />
                         <TextField fx:id="nuevaEstacion" layoutX="174.0" layoutY="96.0" promptText="nueva estacion" />
                         <TextField fx:id="distance" layoutX="333.0" layoutY="96.0" promptText="distancia entre ambas" />
+                        <Label fx:id="confirmation" layoutX="160.0" layoutY="189.0" text="estacion agregada corrrectamente" visible="false" />
                      </children></AnchorPane>
             </content>
           </Tab>

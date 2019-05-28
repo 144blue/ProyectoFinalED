@@ -54,6 +54,8 @@ public class SampleController implements Initializable {
 	    
 	    @FXML
 	    private TextField mejorReco;
+	    @FXML
+	    private Label confirmation;
 	    
 	
 	private boolean isList = true;
@@ -140,12 +142,19 @@ public class SampleController implements Initializable {
 	
 	  
 	    public void generarRecorrido() {
-
+	    	
+	    	
+	    	
 	    }
 	  
 	  
 	    public void agregarEstacion() {
-
+	    	
+	    	int weight= Integer.parseInt(distance.getText());
+	    	tm.getGraphNOCambas().insertEdge(weight, estacionExistente.getText(), nuevaEstacion.getText());
+	    	confirmation.setVisible(false);
+	    	
+	    	
 	    }
 	  
 	  
