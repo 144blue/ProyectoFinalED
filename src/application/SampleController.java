@@ -1,5 +1,7 @@
 package application;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -143,7 +145,18 @@ public class SampleController implements Initializable {
 	  
 	    public void generarRecorrido() {
 	    	
-	    	
+	    	ListGraph<String, Integer> aux=ga.prim(tm.getGraphNOCambas(),"Alpujarra");
+			Vertex<String,Integer> ver = aux.getVertex("Vallejuelos");
+			
+			String rute="";
+			
+			
+			while( ver!=null) {
+				rute+=ver.getValue()+ "\n";
+				ver=ver.getVertexPrevious();
+			}
+			
+			mejorReco.setText(rute);
 	    	
 	    }
 	  
@@ -152,7 +165,7 @@ public class SampleController implements Initializable {
 	    	
 	    	int weight= Integer.parseInt(distance.getText());
 	    	tm.getGraphNOCambas().insertEdge(weight, estacionExistente.getText(), nuevaEstacion.getText());
-	    	confirmation.setVisible(false);
+	    	confirmation.setVisible(true);
 	    	
 	    	
 	    }
