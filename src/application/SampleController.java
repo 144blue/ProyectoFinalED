@@ -1,13 +1,25 @@
 package application;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import javax.swing.JOptionPane;
+
+import graphV.Edge;
+import graphV.GraphAlgorithms;
+import graphV.ListGraph;
+import graphV.Vertex;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
+import model.TransportManager;
 
 public class SampleController implements Initializable {
 	
@@ -19,6 +31,20 @@ public class SampleController implements Initializable {
 	private ComboBox<String> list1;
 	@FXML
 	private ComboBox<String> list2;
+	@FXML
+	private TextArea rute;
+	@FXML
+	private Button ir;
+	
+	private boolean isList = true;
+	private boolean isMatrix = false;
+	
+	private TransportManager tm;
+	private GraphAlgorithms<String, Integer> ga;	
+	public SampleController() {
+		tm = new TransportManager();
+		ga = new GraphAlgorithms<>();
+	}
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -89,7 +115,51 @@ public class SampleController implements Initializable {
 		endList.add("Trece de Noviembre");
 		endList.add("U. de M.");
 		endList.add("Vallejuelos");
-		
 	}
 	
+	public void recomendedRute() {
+		if(isList) {
+			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphNOCambas(), list2.getValue());
+			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
+			String rute = "La ruta es la siguiente: ";
+			int index = 1;
+			int cont = 0;
+			
+			while(vertex != null) {
+				rute += index + ") " + vertex.getValue() + " - " + "\n";
+				Vertex<String, Integer> aux = vertex;
+				vertex = vertex.getVertexPrevious();
+				
+				if(vertex != null) {
+					ArrayList<Edge<String, Integer>> edge = aux.getEdges(vertex);
+					for (int i = 0; i < edge.size(); i++) {
+						cont += edge.get(i).getWeight().intValue();
+					}
+				} index++;
+			}
+			this.rute.setText(rute);
+		} else if(isMatrix) {
+			
+		}
+	}
+	
+	public void usingList() {
+		isList = true;
+		isMatrix = false;
+		Alert a = new Alert(AlertType.INFORMATION);
+		a.setTitle("Guardado");
+		a.setHeaderText(null);
+		a.setContentText("Se está usando una Lista de Adyacencia ahora");
+		a.showAndWait();
+	}
+	
+	public void usingMatrix() {
+		isList = false;
+		isMatrix = true;
+		Alert a = new Alert(AlertType.INFORMATION);
+		a.setTitle("Guardado");
+		a.setHeaderText(null);
+		a.setContentText("Se está usando una Matriz de Adyacencia ahora");
+		a.showAndWait();
+	}
 }

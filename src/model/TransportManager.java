@@ -19,6 +19,62 @@ public class TransportManager {
 	private ListGraph<String, Integer> graphNOCambas;
 	private MatrixGraph<String, Integer> graphMatrix;
 
+	/**
+	 * @return the stations
+	 */
+	public Station[] getStations() {
+		return stations;
+	}
+
+	/**
+	 * @param stations the stations to set
+	 */
+	public void setStations(Station[] stations) {
+		this.stations = stations;
+	}
+
+	/**
+	 * @return the algoritms
+	 */
+	public GraphAlgorithms<String, Integer> getAlgoritms() {
+		return algoritms;
+	}
+
+	/**
+	 * @param algoritms the algoritms to set
+	 */
+	public void setAlgoritms(GraphAlgorithms<String, Integer> algoritms) {
+		this.algoritms = algoritms;
+	}
+
+	/**
+	 * @return the graphNOCambas
+	 */
+	public ListGraph<String, Integer> getGraphNOCambas() {
+		return graphNOCambas;
+	}
+
+	/**
+	 * @param graphNOCambas the graphNOCambas to set
+	 */
+	public void setGraphNOCambas(ListGraph<String, Integer> graphNOCambas) {
+		this.graphNOCambas = graphNOCambas;
+	}
+
+	/**
+	 * @return the graphMatrix
+	 */
+	public MatrixGraph<String, Integer> getGraphMatrix() {
+		return graphMatrix;
+	}
+
+	/**
+	 * @param graphMatrix the graphMatrix to set
+	 */
+	public void setGraphMatrix(MatrixGraph<String, Integer> graphMatrix) {
+		this.graphMatrix = graphMatrix;
+	}
+
 	public TransportManager() {
 		initializeGraphS();
 

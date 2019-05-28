@@ -31,13 +31,14 @@
             </Pane>
             <Pane prefHeight="47.0" prefWidth="498.0">
                <children>
-                  <ComboBox fx:id="list1" layoutX="45.0" layoutY="12.0" prefWidth="150.0" promptText="Estación de salida" />
-                  <ComboBox fx:id="list2" layoutX="277.0" layoutY="12.0" prefWidth="150.0" promptText="Estación de llegada" />
+                  <ComboBox fx:id="list1" layoutX="14.0" layoutY="8.0" prefWidth="150.0" promptText="Estación de salida" />
+                  <ComboBox fx:id="list2" layoutX="174.0" layoutY="8.0" prefWidth="150.0" promptText="Estación de llegada" />
+                  <Button fx:id="ir" layoutX="333.0" layoutY="8.0" mnemonicParsing="false" onAction="#recomendedRute" text="Ir" />
                </children>
             </Pane>
             <Pane prefHeight="160.0" prefWidth="498.0">
                <children>
-                  <TextArea layoutX="8.0" prefHeight="139.0" prefWidth="482.0" />
+                  <TextArea fx:id="rute" layoutX="8.0" prefHeight="139.0" prefWidth="482.0" />
                </children>
             </Pane>
          </children>
