@@ -11,53 +11,70 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="619.0" prefWidth="496.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SampleController">
    <children>
-      <VBox prefHeight="618.0" prefWidth="498.0">
-         <children>
-            <Pane prefHeight="72.0" prefWidth="508.0">
-               <children>
-                  <Label contentDisplay="CENTER" layoutX="182.0" layoutY="17.0" prefHeight="39.0" prefWidth="145.0" text="RAPIMETRO">
-                     <font>
-                        <Font size="27.0" />
-                     </font>
-                  </Label>
-               </children>
-               <VBox.margin>
-                  <Insets />
-               </VBox.margin>
-               <opaqueInsets>
-                  <Insets top="10.0" />
-               </opaqueInsets>
-            </Pane>
-            <Pane prefHeight="367.0" prefWidth="461.0">
-               <children>
-                  <ImageView blendMode="DARKEN" fitHeight="367.0" fitWidth="488.0" layoutX="8.0" layoutY="-1.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../img/Mapa.png" />
-                     </image>
-                  </ImageView>
-                  <Separator layoutX="10.0" layoutY="-1.0" prefHeight="3.0" prefWidth="482.0" />
-                  <Separator layoutX="5.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="367.0" prefWidth="6.0" />
-                  <Separator layoutX="3.0" layoutY="363.0" prefHeight="3.0" prefWidth="489.0" />
-                  <Separator layoutX="487.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="364.0" prefWidth="6.0" />
-               </children>
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
-            </Pane>
-            <Pane prefHeight="47.0" prefWidth="498.0">
-               <children>
-                  <ComboBox fx:id="list1" layoutX="14.0" layoutY="8.0" prefWidth="150.0" promptText="Estación de salida" />
-                  <ComboBox fx:id="list2" layoutX="174.0" layoutY="8.0" prefWidth="150.0" promptText="Estación de llegada" />
-                  <Button fx:id="ir" layoutX="333.0" layoutY="8.0" mnemonicParsing="false" onAction="#recomendedRute" text="Ir" />
-               </children>
-            </Pane>
-            <Pane prefHeight="144.0" prefWidth="498.0">
-               <children>
-                  <TextArea fx:id="rute" layoutX="8.0" layoutY="27.0" prefHeight="108.0" prefWidth="482.0" />
-                  <Label fx:id="time" layoutX="29.0" layoutY="6.0" text="Tiempo total del recorrido: " />
-               </children>
-            </Pane>
-         </children>
-      </VBox>
+      <TabPane prefHeight="619.0" prefWidth="496.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Developer">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+          <Tab text="Principal">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="565.0" prefWidth="489.0">
+                     <children>
+                        <VBox prefHeight="618.0" prefWidth="498.0">
+                           <children>
+                              <Pane prefHeight="72.0" prefWidth="508.0">
+                                 <children>
+                                    <Label contentDisplay="CENTER" layoutX="182.0" layoutY="17.0" prefHeight="39.0" prefWidth="145.0" text="RAPIMETRO">
+                                       <font>
+                                          <Font size="27.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <opaqueInsets>
+                                    <Insets top="10.0" />
+                                 </opaqueInsets>
+                              </Pane>
+                              <Pane prefHeight="367.0" prefWidth="461.0">
+                                 <children>
+                                    <ImageView blendMode="DARKEN" fitHeight="367.0" fitWidth="488.0" layoutX="8.0" layoutY="-1.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../img/Mapa.png" />
+                                       </image>
+                                    </ImageView>
+                                    <Separator layoutX="10.0" layoutY="-1.0" prefHeight="3.0" prefWidth="482.0" />
+                                    <Separator layoutX="5.0" layoutY="-1.0" orientation="VERTICAL" prefHeight="367.0" prefWidth="6.0" />
+                                    <Separator layoutX="3.0" layoutY="363.0" prefHeight="3.0" prefWidth="489.0" />
+                                    <Separator layoutX="487.0" layoutY="-5.0" orientation="VERTICAL" prefHeight="364.0" prefWidth="6.0" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </Pane>
+                              <Pane prefHeight="47.0" prefWidth="498.0">
+                                 <children>
+                                    <ComboBox fx:id="list1" layoutX="14.0" layoutY="8.0" prefWidth="150.0" promptText="Estación de salida" />
+                                    <ComboBox fx:id="list2" layoutX="174.0" layoutY="8.0" prefWidth="150.0" promptText="Estación de llegada" />
+                                    <Button fx:id="ir" layoutX="333.0" layoutY="8.0" mnemonicParsing="false" onAction="#recomendedRute" text="Ir" />
+                                 </children>
+                              </Pane>
+                              <Pane prefHeight="144.0" prefWidth="498.0">
+                                 <children>
+                                    <TextArea fx:id="rute" layoutX="8.0" layoutY="27.0" prefHeight="108.0" prefWidth="482.0" />
+                                    <Label fx:id="time" layoutX="29.0" layoutY="6.0" text="Tiempo total del recorrido: " />
+                                 </children>
+                              </Pane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>
