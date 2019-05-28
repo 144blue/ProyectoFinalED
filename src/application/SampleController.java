@@ -19,8 +19,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import model.TransportManager;
 
 public class SampleController implements Initializable {
@@ -58,10 +60,15 @@ public class SampleController implements Initializable {
 	    private TextField mejorReco;
 	    @FXML
 	    private Label confirmation;
+	    @FXML
+	    private RadioButton ifMatixButton;
+	    @FXML
+	    private RadioButton ifListaButton;
 	    
 	
 	private boolean isList = true;
 	private boolean isMatrix = false;
+	private ToggleGroup group;
 	
 	private TransportManager tm;
 	private GraphAlgorithms<String, Integer> ga;	
@@ -72,6 +79,11 @@ public class SampleController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		group= new ToggleGroup();
+		ifListaButton.setToggleGroup(group);
+		ifMatixButton.setToggleGroup(group);
+		
 		addStationList();
 		
 		list1.setItems(beginList);
@@ -173,6 +185,12 @@ public class SampleController implements Initializable {
 	  
 	  
 	public void recomendedRute() {
+		
+		if(ifListaButton.isArmed()) {
+			isList=false;
+			isMatrix=true;
+		}
+		
 		if(isList) {
 			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphNOCambas(), list2.getValue());
 			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
