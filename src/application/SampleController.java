@@ -26,7 +26,7 @@ import javafx.scene.control.ToggleGroup;
 import model.TransportManager;
 
 public class SampleController implements Initializable {
-	
+
 	@FXML
 	private ObservableList<String> beginList = FXCollections.observableArrayList();
 	@FXML
@@ -41,58 +41,58 @@ public class SampleController implements Initializable {
 	private Label time;
 	@FXML
 	private Button ir;
-	 @FXML
-	    private Button generar;
+	@FXML
+	private Button generar;
 
-	    @FXML
-	    private Button ingresarEstacion;
+	@FXML
+	private Button ingresarEstacion;
 
-	    @FXML
-	    private TextField estacionExistente;
+	@FXML
+	private TextField estacionExistente;
 
-	    @FXML
-	    private TextField nuevaEstacion;
+	@FXML
+	private TextField nuevaEstacion;
 
-	    @FXML
-	    private TextField distance;
-	    
-	    @FXML
-	    private TextField mejorReco;
-	    @FXML
-	    private Label confirmation;
-	    @FXML
-	    private RadioButton ifMatixButton;
-	    @FXML
-	    private RadioButton ifListaButton;
-	    
-	
+	@FXML
+	private TextField distance;
+
+	@FXML
+	private TextField mejorReco;
+	@FXML
+	private Label confirmation;
+	@FXML
+	private RadioButton ifMatixButton;
+	@FXML
+	private RadioButton ifListaButton;
+
 	private boolean isList = true;
 	private boolean isMatrix = false;
 	private ToggleGroup group;
-	
+
 	private TransportManager tm;
-	private GraphAlgorithms<String, Integer> ga;	
+	private GraphAlgorithms<String, Integer> ga;
+
 	public SampleController() {
 		tm = new TransportManager();
 		ga = new GraphAlgorithms<>();
 	}
-	
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		
-		group= new ToggleGroup();
+
+		group = new ToggleGroup();
 		ifListaButton.setToggleGroup(group);
 		ifMatixButton.setToggleGroup(group);
-		
+
 		addStationList();
-		
+
 		list1.setItems(beginList);
 		list1.setVisibleRowCount(8);
-		
+
 		list2.setItems(endList);
 		list2.setVisibleRowCount(8);
 	}
-	
+
 	public void addStationList() {
 		beginList.add("Alpujarra");
 		beginList.add("Barrio Colón");
@@ -122,7 +122,7 @@ public class SampleController implements Initializable {
 		beginList.add("Trece de Noviembre");
 		beginList.add("U. de M.");
 		beginList.add("Vallejuelos");
-		
+
 		endList.add("Alpujarra");
 		endList.add("Barrio Colón");
 		endList.add("Berlin");
@@ -152,92 +152,97 @@ public class SampleController implements Initializable {
 		endList.add("U. de M.");
 		endList.add("Vallejuelos");
 	}
-	
-	
-	  
-	    public void generarRecorrido() {
-	    	
-	    	ListGraph<String, Integer> aux=ga.prim(tm.getGraphNOCambas(),"Alpujarra");
-			Vertex<String,Integer> ver = aux.getVertex("Vallejuelos");
-			
-			String rute="";
-			
-			
-			while( ver!=null) {
-				rute += ver.getValue() + " - " + "\n";
-				ver=ver.getVertexPrevious();
-			}
-			
-			mejorReco.setText(rute);
-	    	
-	    }
-	  
-	  
-	    public void agregarEstacion() {
-	    	
-	    	int weight= Integer.parseInt(distance.getText());
-	    	tm.getGraphNOCambas().insertEdge(weight, estacionExistente.getText(), nuevaEstacion.getText());
-	    	confirmation.setVisible(true);
-	    	
-	    	
-	    }
-	  
-	  
-	  
+
+	public void generarRecorrido() {
+
+		ListGraph<String, Integer> aux = ga.prim(tm.getGraphNOCambas(), "Alpujarra");
+		Vertex<String, Integer> ver = aux.getVertex("Vallejuelos");
+
+		String rute = "";
+
+		while (ver != null) {
+			rute += ver.getValue() + " - " + "\n";
+			ver = ver.getVertexPrevious();
+		}
+
+		mejorReco.setText(rute);
+
+	}
+
+	public void agregarEstacion() {
+
+		int weight = Integer.parseInt(distance.getText());
+		tm.getGraphNOCambas().insertEdge(weight, estacionExistente.getText(), nuevaEstacion.getText());
+		confirmation.setVisible(true);
+
+	}
+
 	public void recomendedRute() {
 		
-		if(ifListaButton.isArmed()) {
-			isList=false;
-			isMatrix=true;
+		if(list1.getValue() == null || list2.getValue() == null) {
+			Alert a = new Alert(AlertType.ERROR);
+			a.setTitle("Error");
+			a.setContentText("Debe indicar una estación de salida y de llegada!");
+			a.setHeaderText(null);
+			a.showAndWait();
 		}
-		
-		if(isList) {
-			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphNOCambas(), list2.getValue());
+
+		if (ifListaButton.isArmed()) {
+			isList = false;
+			isMatrix = true;
+		}
+
+		if (isList) {
+			ListGraph<String, Integer> graph = (ListGraph<String, Integer>) ga.dijkstra(tm.getGraphNOCambas(),
+					list2.getValue());
 			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
 			String rute = "La ruta es la siguiente: " + "\n";
 			int index = 1;
 			int cont = 0;
-			
-			while(vertex != null) {
+
+			while (vertex != null) {
 				rute += index + ") " + vertex.getValue() + " - ";
 				Vertex<String, Integer> aux = vertex;
 				vertex = vertex.getVertexPrevious();
-				
-				if(vertex != null) {
+
+				if (vertex != null) {
 					rute += vertex.getValue() + "\n";
 					ArrayList<Edge<String, Integer>> edge = aux.getEdges(vertex);
 					for (int i = 0; i < edge.size(); i++) {
 						cont += edge.get(i).getWeight().intValue();
 					}
-				} index++;
+				}
+				index++;
 			}
 			this.rute.setText(rute + "Fin");
-			time.setText("Tiempo total del recorrido: " + (cont*1.7) + " minutos");
-		} else if(isMatrix) {
-			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphMatrix(), list2.getValue());
+			time.setText("Tiempo total del recorrido: " + (cont * 1.7) + " minutos");
+		} else if (isMatrix) {
+			ListGraph<String, Integer> graph = (ListGraph<String, Integer>) ga.dijkstra(tm.getGraphMatrix(),
+					list2.getValue());
 			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
 			String rute = "La ruta es la siguiente: " + "\n";
 			int index = 1;
 			int cont = 0;
-			
-			while(vertex != null) {
+
+			while (vertex != null) {
 				rute += index + ") " + vertex.getValue() + " - ";
 				Vertex<String, Integer> aux = vertex;
 				vertex = vertex.getVertexPrevious();
-				
-				if(vertex != null) {
+
+				if (vertex != null) {
 					rute += vertex.getValue() + " - " + "\n";
 					ArrayList<Edge<String, Integer>> edge = aux.getEdges(vertex);
 					for (int i = 0; i < edge.size(); i++) {
 						cont += edge.get(i).getWeight().intValue();
 					}
-				} index++;
+				}
+				index++;
 			}
 			this.rute.setText(rute + "Fin");
-			time.setText("Tiempo total del recorrido: " + (cont*1.7) + " minutos");
+			time.setText("Tiempo total del recorrido: " + (cont * 1.7) + " minutos");
 		}
 	}
-	
+
 	public void usingList() {
 		isList = true;
 		isMatrix = false;
@@ -247,7 +252,7 @@ public class SampleController implements Initializable {
 		a.setContentText("Se está usando una Lista de Adyacencia ahora");
 		a.showAndWait();
 	}
-	
+
 	public void usingMatrix() {
 		isList = false;
 		isMatrix = true;
