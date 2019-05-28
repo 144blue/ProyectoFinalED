@@ -4,8 +4,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import javax.swing.JOptionPane;
-
 import graphV.Edge;
 import graphV.GraphAlgorithms;
 import graphV.ListGraph;
@@ -18,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import model.TransportManager;
 
@@ -33,6 +32,8 @@ public class SampleController implements Initializable {
 	private ComboBox<String> list2;
 	@FXML
 	private TextArea rute;
+	@FXML
+	private Label time;
 	@FXML
 	private Button ir;
 	
@@ -138,8 +139,28 @@ public class SampleController implements Initializable {
 				} index++;
 			}
 			this.rute.setText(rute);
+			time.setText("Tiempo total del recorrido: " + (cont*1.7) + " minutos");
 		} else if(isMatrix) {
+			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphMatrix(), list2.getValue());
+			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
+			String rute = "La ruta es la siguiente: ";
+			int index = 1;
+			int cont = 0;
 			
+			while(vertex != null) {
+				rute += index + ") " + vertex.getValue() + " - " + "\n";
+				Vertex<String, Integer> aux = vertex;
+				vertex = vertex.getVertexPrevious();
+				
+				if(vertex != null) {
+					ArrayList<Edge<String, Integer>> edge = aux.getEdges(vertex);
+					for (int i = 0; i < edge.size(); i++) {
+						cont += edge.get(i).getWeight().intValue();
+					}
+				} index++;
+			}
+			this.rute.setText(rute);
+			time.setText("Tiempo total del recorrido: " + (cont*1.7) + " minutos");
 		}
 	}
 	
