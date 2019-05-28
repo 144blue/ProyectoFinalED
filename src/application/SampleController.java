@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import model.TransportManager;
 
 public class SampleController implements Initializable {
@@ -36,6 +37,24 @@ public class SampleController implements Initializable {
 	private Label time;
 	@FXML
 	private Button ir;
+	 @FXML
+	    private Button generar;
+
+	    @FXML
+	    private Button ingresarEstacion;
+
+	    @FXML
+	    private TextField estacionExistente;
+
+	    @FXML
+	    private TextField nuevaEstacion;
+
+	    @FXML
+	    private TextField distance;
+	    
+	    @FXML
+	    private TextField mejorReco;
+	    
 	
 	private boolean isList = true;
 	private boolean isMatrix = false;
@@ -118,6 +137,19 @@ public class SampleController implements Initializable {
 		endList.add("Vallejuelos");
 	}
 	
+	
+	  
+	    public void generarRecorrido() {
+
+	    }
+	  
+	  
+	    public void agregarEstacion() {
+
+	    }
+	  
+	  
+	  
 	public void recomendedRute() {
 		if(isList) {
 			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphNOCambas(), list2.getValue());
