@@ -1,5 +1,7 @@
 package application;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -17,7 +19,10 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import model.TransportManager;
 
 public class SampleController implements Initializable {
@@ -36,9 +41,34 @@ public class SampleController implements Initializable {
 	private Label time;
 	@FXML
 	private Button ir;
+	 @FXML
+	    private Button generar;
+
+	    @FXML
+	    private Button ingresarEstacion;
+
+	    @FXML
+	    private TextField estacionExistente;
+
+	    @FXML
+	    private TextField nuevaEstacion;
+
+	    @FXML
+	    private TextField distance;
+	    
+	    @FXML
+	    private TextField mejorReco;
+	    @FXML
+	    private Label confirmation;
+	    @FXML
+	    private RadioButton ifMatixButton;
+	    @FXML
+	    private RadioButton ifListaButton;
+	    
 	
 	private boolean isList = true;
 	private boolean isMatrix = false;
+	private ToggleGroup group;
 	
 	private TransportManager tm;
 	private GraphAlgorithms<String, Integer> ga;	
@@ -49,6 +79,11 @@ public class SampleController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
+		
+		group= new ToggleGroup();
+		ifListaButton.setToggleGroup(group);
+		ifMatixButton.setToggleGroup(group);
+		
 		addStationList();
 		
 		list1.setItems(beginList);
@@ -118,48 +153,87 @@ public class SampleController implements Initializable {
 		endList.add("Vallejuelos");
 	}
 	
+	
+	  
+	    public void generarRecorrido() {
+	    	
+	    	ListGraph<String, Integer> aux=ga.prim(tm.getGraphNOCambas(),"Alpujarra");
+			Vertex<String,Integer> ver = aux.getVertex("Vallejuelos");
+			
+			String rute="";
+			
+			
+			while( ver!=null) {
+				rute += ver.getValue() + " - " + "\n";
+				ver=ver.getVertexPrevious();
+			}
+			
+			mejorReco.setText(rute);
+	    	
+	    }
+	  
+	  
+	    public void agregarEstacion() {
+	    	
+	    	int weight= Integer.parseInt(distance.getText());
+	    	tm.getGraphNOCambas().insertEdge(weight, estacionExistente.getText(), nuevaEstacion.getText());
+	    	confirmation.setVisible(true);
+	    	
+	    	
+	    }
+	  
+	  
+	  
 	public void recomendedRute() {
+		
+		if(ifListaButton.isArmed()) {
+			isList=false;
+			isMatrix=true;
+		}
+		
 		if(isList) {
 			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphNOCambas(), list2.getValue());
 			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
-			String rute = "La ruta es la siguiente: ";
+			String rute = "La ruta es la siguiente: " + "\n";
 			int index = 1;
 			int cont = 0;
 			
 			while(vertex != null) {
-				rute += index + ") " + vertex.getValue() + " - " + "\n";
+				rute += index + ") " + vertex.getValue() + " - ";
 				Vertex<String, Integer> aux = vertex;
 				vertex = vertex.getVertexPrevious();
 				
 				if(vertex != null) {
+					rute += vertex.getValue() + "\n";
 					ArrayList<Edge<String, Integer>> edge = aux.getEdges(vertex);
 					for (int i = 0; i < edge.size(); i++) {
 						cont += edge.get(i).getWeight().intValue();
 					}
 				} index++;
 			}
-			this.rute.setText(rute);
+			this.rute.setText(rute + "Fin");
 			time.setText("Tiempo total del recorrido: " + (cont*1.7) + " minutos");
 		} else if(isMatrix) {
 			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphMatrix(), list2.getValue());
 			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
-			String rute = "La ruta es la siguiente: ";
+			String rute = "La ruta es la siguiente: " + "\n";
 			int index = 1;
 			int cont = 0;
 			
 			while(vertex != null) {
-				rute += index + ") " + vertex.getValue() + " - " + "\n";
+				rute += index + ") " + vertex.getValue() + " - ";
 				Vertex<String, Integer> aux = vertex;
 				vertex = vertex.getVertexPrevious();
 				
 				if(vertex != null) {
+					rute += vertex.getValue() + " - " + "\n";
 					ArrayList<Edge<String, Integer>> edge = aux.getEdges(vertex);
 					for (int i = 0; i < edge.size(); i++) {
 						cont += edge.get(i).getWeight().intValue();
 					}
 				} index++;
 			}
-			this.rute.setText(rute);
+			this.rute.setText(rute + "Fin");
 			time.setText("Tiempo total del recorrido: " + (cont*1.7) + " minutos");
 		}
 	}

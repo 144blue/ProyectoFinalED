@@ -1,4 +1,12 @@
-/model/
 /application/
+<<<<<<< HEAD
 /test/
 /graphV/
+=======
+/auxiliaries/
+/graphV/
+/interfaces/
+/minHeapG/
+/model/
+/test/
+>>>>>>> 2a97ccdbb630ad379910c35449195a87c5bd4f01
