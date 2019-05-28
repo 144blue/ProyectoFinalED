@@ -164,7 +164,7 @@ public class SampleController implements Initializable {
 			
 			
 			while( ver!=null) {
-				rute+=ver.getValue()+ "\n";
+				rute += ver.getValue() + " - " + "\n";
 				ver=ver.getVertexPrevious();
 			}
 			
@@ -194,44 +194,46 @@ public class SampleController implements Initializable {
 		if(isList) {
 			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphNOCambas(), list2.getValue());
 			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
-			String rute = "La ruta es la siguiente: ";
+			String rute = "La ruta es la siguiente: " + "\n";
 			int index = 1;
 			int cont = 0;
 			
 			while(vertex != null) {
-				rute += index + ") " + vertex.getValue() + " - " + "\n";
+				rute += index + ") " + vertex.getValue() + " - ";
 				Vertex<String, Integer> aux = vertex;
 				vertex = vertex.getVertexPrevious();
 				
 				if(vertex != null) {
+					rute += vertex.getValue() + "\n";
 					ArrayList<Edge<String, Integer>> edge = aux.getEdges(vertex);
 					for (int i = 0; i < edge.size(); i++) {
 						cont += edge.get(i).getWeight().intValue();
 					}
 				} index++;
 			}
-			this.rute.setText(rute);
+			this.rute.setText(rute + "Fin");
 			time.setText("Tiempo total del recorrido: " + (cont*1.7) + " minutos");
 		} else if(isMatrix) {
 			ListGraph<String, Integer> graph = (ListGraph<String, Integer>)ga.dijkstra(tm.getGraphMatrix(), list2.getValue());
 			Vertex<String, Integer> vertex = graph.getVertex(list1.getValue());
-			String rute = "La ruta es la siguiente: ";
+			String rute = "La ruta es la siguiente: " + "\n";
 			int index = 1;
 			int cont = 0;
 			
 			while(vertex != null) {
-				rute += index + ") " + vertex.getValue() + " - " + "\n";
+				rute += index + ") " + vertex.getValue() + " - ";
 				Vertex<String, Integer> aux = vertex;
 				vertex = vertex.getVertexPrevious();
 				
 				if(vertex != null) {
+					rute += vertex.getValue() + " - " + "\n";
 					ArrayList<Edge<String, Integer>> edge = aux.getEdges(vertex);
 					for (int i = 0; i < edge.size(); i++) {
 						cont += edge.get(i).getWeight().intValue();
 					}
 				} index++;
 			}
-			this.rute.setText(rute);
+			this.rute.setText(rute + "Fin");
 			time.setText("Tiempo total del recorrido: " + (cont*1.7) + " minutos");
 		}
 	}
