@@ -23,4 +23,27 @@ IGraph<Integer,Integer> graphL;
 	}
 	
 
+	@Test
+	void test0() {
+		scenario1();
+		assertTrue(graphL.getAmountVertices()==0);
+		graphL.insertVertex(3);
+		graphL.insertVertex(1);
+		assertTrue(graphL.getAmountVertices()==2);
+	}
+	
+	@Test
+	void testInsertVertex() {
+		scenario1();
+		graphL.insertVertex(3);
+		graphL.insertVertex(4);
+		graphL.insertVertex(7);
+		graphL.insertVertex(1);
+		graphL.insertVertex(9);
+		
+		assertFalse(graphL.insertVertex(9));
+		assertTrue(graphL.insertVertex(10));
+		assertTrue(graphL.getAmountVertices()==6);
+	}
+	
 }

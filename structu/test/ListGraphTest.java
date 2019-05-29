@@ -49,7 +49,6 @@ class ListGraphTest {
 		graphL.insertVertex(3);
 		graphL.insertVertex(1);
 		assertTrue(graphL.getAmountVertices()==2);
-		
 	}
 	@Test
 	void testInsertVertex() {
