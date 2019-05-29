@@ -2,6 +2,8 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import graphV.ListGraph;
@@ -30,6 +32,16 @@ IGraph<Integer,Integer> graphL;
 		graphL.insertEdge(1,2,4);
 		graphL.insertEdge(3,4,7);
 	}
+	
+	public void scenario4() {
+		graphL=new ListGraph<Integer,Integer>(true);
+		graphL.insertVertex(3);
+		graphL.insertVertex(2);
+		graphL.insertVertex(1);
+		graphL.insertVertex(6);
+		graphL.insertVertex(9);
+	}
+
 
 	@Test
 	void test0() {
@@ -38,6 +50,12 @@ IGraph<Integer,Integer> graphL;
 		graphL.insertVertex(3);
 		graphL.insertVertex(1);
 		assertTrue(graphL.getAmountVertices()==2);
+	}
+	
+	@Test
+	void testIsGraphUndirected() {
+		scenario1();
+		assertTrue(graphL.isGraphUndirected());
 	}
 	
 
@@ -92,6 +110,22 @@ IGraph<Integer,Integer> graphL;
 		assertFalse(graphL.insertVertex(9));
 		assertTrue(graphL.insertVertex(10));
 		assertTrue(graphL.getAmountVertices()==6);
+	}
+	
+	@Test
+	void testGetAmountVertices() {
+		scenario4();
+		assertTrue(graphL.getAmountVertices()==5);
+	}
+	
+	@Test
+	void testgetValues() {
+		scenario4();
+		ArrayList<Integer> elems= graphL.getValues();
+		int[] expected= {1,2,3,6,9};
+		
+		for(int i=0;i<elems.size();i++)
+			assertTrue(elems.get(i).intValue()==expected[i]);
 	}
 	
 }
