@@ -32,6 +32,22 @@ IGraph<Integer,Integer> graphL;
 		assertTrue(graphL.getAmountVertices()==2);
 	}
 	
+
+	@Test
+	void testInserEdge() {
+		scenario2();
+		assertTrue(graphL.insertEdge(4,3,4));
+		assertTrue(graphL.insertEdge(3,3,2));
+	//	assertFalse(graphL.insertEdge(4,3,4));
+		assertTrue(graphL.insertEdge(2,3,7));
+		assertTrue(graphL.insertEdge(1,2,4));
+		assertTrue(graphL.insertEdge(5,2,7));
+		assertTrue(graphL.insertEdge(3,4,7));
+		//assertFalse(graphL.insertEdge(4,4,3));
+		assertTrue(graphL.insertEdge(7,5,7));
+		assertTrue(graphL.getEdges().size()==7);
+	}
+	
 	@Test
 	void testInsertVertex() {
 		scenario1();
